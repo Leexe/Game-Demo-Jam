@@ -1,264 +1,242 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class InputManager : PersistentMonoSingleton<InputManager>
 {
-    // Action Maps
-    private const string PlayerActionMap = "Player";
-    private const string DialogueActionMap = "Dialogue";
-    private const string UIActionMap = "UI";
+	// Action Maps
+	private const string PlayerActionMap = "Player";
+	private const string DialogueActionMap = "Dialogue";
+	private const string UIActionMap = "UI";
 
-    // References
-    [Tooltip("The Input Action Asset containing all player and UI actions.")]
-    public InputActionAsset InputActions;
+	// References
+	[Tooltip("The Input Action Asset containing all player and UI actions.")]
+	public InputActionAsset InputActions;
 
-    // Events
-    [Header("Continuous Events (Updated Every Frame)")]
-    [HideInInspector]
-    public UnityEvent<Vector2> OnMovement;
+	// Events
+	public event Action<Vector2> OnMovement;
+	public event Action OnShootingPerformed;
+	public event Action OnShootingReleased;
+	public event Action OnZoomPerformed;
+	public event Action OnJumpPerformed;
+	public event Action OnCrouchPerformed;
+	public event Action OnCrouchRelease;
+	public event Action OnDashPerformed;
+	public event Action OnReloadPerformed;
+	public event Action OnContinueStoryPerformed;
+	public event Action OnEscapePerformed;
+	public event Action OnBacklogPerformed;
+	public event Action OnAnyInputPerformed;
 
-    [Header("Discrete Events (Fired on Press/Release)")]
-    [HideInInspector]
-    public UnityEvent OnJumpPerformed;
+	private InputAction _movementAction;
+	private List<ActionBinding> _bindings = new List<ActionBinding>();
 
-    [HideInInspector]
-    public UnityEvent OnDashPerformed;
+	/** Start Methods **/
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
 
-    [HideInInspector]
-    public UnityEvent OnShootingPerformed;
+		if (InputActions == null)
+		{
+			Debug.LogError("InputManager: InputActions asset is not assigned!");
+			return;
+		}
 
-    [HideInInspector]
-    public UnityEvent OnShootingReleased;
+		SetupInputActions();
+		EnableUIInput();
+	}
 
-    [HideInInspector]
-    public UnityEvent OnReloadPerformed;
+	private void OnEnable()
+	{
+		if (InputActions != null)
+		{
+			EnablePlayerInput();
+			EnableVisualNovelInput();
+			SubscribeEvents();
+		}
+	}
 
-    [HideInInspector]
-    public UnityEvent OnCrouchPerformed;
+	private void OnDisable()
+	{
+		if (IsActiveInstance && InputActions != null)
+		{
+			DisablePlayerInput();
+			DisableVisualNovelInput();
+		}
+		UnsubscribeEvents();
+	}
 
-    [HideInInspector]
-    public UnityEvent OnCrouchRelease;
+	private void SetupInputActions()
+	{
+		_bindings.Clear();
+		_movementAction = InputActions.FindAction("Movement");
 
-    [HideInInspector]
-    public UnityEvent OnChangeGun;
+		BindAction("ContinueStory", performed: () => OnContinueStoryPerformed?.Invoke());
+		BindAction("Escape", performed: () => OnEscapePerformed?.Invoke());
+		BindAction("Backlog", performed: () => OnBacklogPerformed?.Invoke());
+		BindAction("Zoom", performed: () => OnZoomPerformed?.Invoke());
+		BindAction("Jump", performed: () => OnJumpPerformed?.Invoke());
+		BindAction("Dash", performed: () => OnDashPerformed?.Invoke());
+		BindAction(
+			"Shoot",
+			performed: () => OnShootingPerformed?.Invoke(),
+			canceled: () => OnShootingReleased?.Invoke()
+		);
+		BindAction("Reload", performed: () => OnReloadPerformed?.Invoke());
+		BindAction("Crouch", performed: () => OnCrouchPerformed?.Invoke(), canceled: () => OnCrouchRelease?.Invoke());
+	}
 
-    [HideInInspector]
-    public UnityEvent OnContinueStoryPerformed;
+	private void SubscribeEvents()
+	{
+		foreach (ActionBinding binding in _bindings)
+		{
+			binding.Subscribe();
+		}
+	}
 
-    [HideInInspector]
-    public UnityEvent OnEscapePerformed;
+	private void UnsubscribeEvents()
+	{
+		foreach (ActionBinding binding in _bindings)
+		{
+			binding.Unsubscribe();
+		}
+	}
 
-    [HideInInspector]
-    public UnityEvent OnBacklogPerformed;
+	/** Update Methods **/
+	private void Update()
+	{
+		if (!InputActions)
+		{
+			return;
+		}
 
-    [HideInInspector]
-    public UnityEvent OnAnyInputPerformed;
+		UpdateContinuousInputs();
+		CheckAnyInput();
+	}
 
-    // Actions
-    private InputAction _backlogAction;
-    private InputAction _changeGun;
-    private InputAction _continueStoryAction;
-    private InputAction _crouchAction;
-    private InputAction _dashAction;
-    private InputAction _escapeAction;
-    private InputAction _jumpAction;
-    private InputAction _movementAction;
-    private InputAction _reloadAction;
-    private InputAction _shootAction;
+	private void UpdateContinuousInputs()
+	{
+		if (_movementAction != null)
+		{
+			Vector3 readVector = _movementAction.ReadValue<Vector3>();
+			OnMovement?.Invoke(new Vector2(readVector.x, readVector.z));
+		}
+	}
 
-    /** Start Methods **/
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
+	/// <summary>
+	/// Checks for any input and invokes the event
+	/// </summary>
+	private void CheckAnyInput()
+	{
+		if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame)
+		{
+			OnAnyInputPerformed?.Invoke();
+			return;
+		}
 
-        if (InputActions == null)
-        {
-            Debug.LogError("InputManager: InputActions asset is not assigned!");
-            return;
-        }
+		if (
+			Mouse.current != null
+			&& (
+				Mouse.current.leftButton.wasPressedThisFrame
+				|| Mouse.current.rightButton.wasPressedThisFrame
+				|| Mouse.current.middleButton.wasPressedThisFrame
+			)
+		)
+		{
+			OnAnyInputPerformed?.Invoke();
+		}
+	}
 
-        SetupInputActions();
-        EnableUIInput();
-    }
+	/// <summary>
+	/// Enable Player Input
+	/// </summary>
+	public void EnablePlayerInput()
+	{
+		InputActions?.FindActionMap(PlayerActionMap)?.Enable();
+	}
 
-    private void OnEnable()
-    {
-        if (InputActions != null)
-        {
-            EnablePlayerInput();
-            EnableDialogueInput();
-            SubscribeEvents();
-        }
-    }
+	/// <summary>
+	/// Disable Player Input
+	/// </summary>
+	public void DisablePlayerInput()
+	{
+		InputActions?.FindActionMap(PlayerActionMap)?.Disable();
+	}
 
-    private void OnDisable()
-    {
-        if (!IsActiveInstance || InputActions == null)
-            return;
+	/// <summary>
+	/// Enable UI Input
+	/// </summary>
+	public void EnableUIInput()
+	{
+		InputActions?.FindActionMap(UIActionMap)?.Enable();
+	}
 
-        DisablePlayerInput();
-        DisableDialogueInput();
-        UnsubscribeEvents();
-    }
+	/// <summary>
+	/// Disable UI Input
+	/// </summary>
+	public void DisableUIInput()
+	{
+		InputActions?.FindActionMap(UIActionMap)?.Disable();
+	}
 
-    private void SetupInputActions()
-    {
-        _continueStoryAction = InputActions.FindAction("ContinueStory");
-        _escapeAction = InputActions.FindAction("Escape");
-        _backlogAction = InputActions.FindAction("Backlog");
-        _movementAction = InputActions.FindAction("Movement");
-        _jumpAction = InputActions.FindAction("Jump");
-        _dashAction = InputActions.FindAction("Dash");
-        _shootAction = InputActions.FindAction("Shoot");
-        _reloadAction = InputActions.FindAction("Reload");
-        _crouchAction = InputActions.FindAction("Crouch");
-    }
+	/// <summary>
+	/// Enable VisualNovel Input
+	/// </summary>
+	public void EnableVisualNovelInput()
+	{
+		InputActions?.FindActionMap(DialogueActionMap)?.Enable();
+	}
 
-    private void SubscribeEvents()
-    {
-        _continueStoryAction.performed += HandleContinueStory;
-        _escapeAction.performed += HandleEscape;
-        _backlogAction.performed += HandleBacklog;
-        _jumpAction.performed += HandleJump;
-        _dashAction.performed += HandleDash;
-        _shootAction.performed += HandleShootPerformed;
-        _shootAction.canceled += HandleShootReleased;
-        _reloadAction.performed += HandleReload;
-        _crouchAction.performed += HandleCrouchPerformed;
-        _crouchAction.canceled += HandleCrouchReleased;
-    }
+	/// <summary>
+	/// Disable VisualNovel Input
+	/// </summary>
+	public void DisableVisualNovelInput()
+	{
+		InputActions?.FindActionMap(DialogueActionMap)?.Disable();
+	}
 
-    private void UnsubscribeEvents()
-    {
-        _continueStoryAction.performed -= HandleContinueStory;
-        _escapeAction.performed -= HandleEscape;
-        _backlogAction.performed -= HandleBacklog;
-        _jumpAction.performed -= HandleJump;
-        _dashAction.performed -= HandleDash;
-        _shootAction.performed -= HandleShootPerformed;
-        _shootAction.canceled -= HandleShootReleased;
-        _reloadAction.performed -= HandleReload;
-        _crouchAction.performed -= HandleCrouchPerformed;
-        _crouchAction.canceled -= HandleCrouchReleased;
-    }
+	/** Action Binding System **/
+	private class ActionBinding
+	{
+		private readonly Action _performedEvent;
+		private readonly Action _canceledEvent;
+		private readonly InputAction _action;
 
-    /** Update Methods **/
-    private void Update()
-    {
-        if (InputActions == null)
-            return;
+		public ActionBinding(InputAction action, Action performed, Action canceled)
+		{
+			_action = action;
+			_performedEvent = performed;
+			_canceledEvent = canceled;
+		}
 
-        UpdateContinuousInputs();
-        CheckAnyInput();
-    }
+		public void Subscribe()
+		{
+			_action.performed += OnPerformed;
+			_action.canceled += OnCanceled;
+		}
 
-    private void UpdateContinuousInputs()
-    {
-        if (_movementAction != null)
-        {
-            Vector3 readVector = _movementAction.ReadValue<Vector3>();
-            OnMovement?.Invoke(new Vector2(readVector.x, readVector.z));
-        }
-    }
+		public void Unsubscribe()
+		{
+			_action.performed -= OnPerformed;
+			_action.canceled -= OnCanceled;
+		}
 
-    /// <summary>
-    /// Checks for any input and invokes the event
-    /// </summary>
-    private void CheckAnyInput()
-    {
-        if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame)
-        {
-            OnAnyInputPerformed?.Invoke();
-            return;
-        }
+		private void OnPerformed(InputAction.CallbackContext context) => _performedEvent?.Invoke();
 
-        if (
-            Mouse.current != null
-            && (
-                Mouse.current.leftButton.wasPressedThisFrame
-                || Mouse.current.rightButton.wasPressedThisFrame
-                || Mouse.current.middleButton.wasPressedThisFrame
-            )
-        )
-        {
-            OnAnyInputPerformed?.Invoke();
-        }
-    }
+		private void OnCanceled(InputAction.CallbackContext context) => _canceledEvent?.Invoke();
+	}
 
-    // Action Event Handlers (Using named methods avoids closure allocations)
-    private void HandleContinueStory(InputAction.CallbackContext context) =>
-        OnContinueStoryPerformed?.Invoke();
-
-    private void HandleEscape(InputAction.CallbackContext context) => OnEscapePerformed?.Invoke();
-
-    private void HandleBacklog(InputAction.CallbackContext context) => OnBacklogPerformed?.Invoke();
-
-    private void HandleJump(InputAction.CallbackContext context) => OnJumpPerformed?.Invoke();
-
-    private void HandleDash(InputAction.CallbackContext context) => OnDashPerformed?.Invoke();
-
-    private void HandleShootPerformed(InputAction.CallbackContext context) =>
-        OnShootingPerformed?.Invoke();
-
-    private void HandleShootReleased(InputAction.CallbackContext context) =>
-        OnShootingReleased?.Invoke();
-
-    private void HandleReload(InputAction.CallbackContext context) => OnReloadPerformed?.Invoke();
-
-    private void HandleCrouchPerformed(InputAction.CallbackContext context) =>
-        OnCrouchPerformed?.Invoke();
-
-    private void HandleCrouchReleased(InputAction.CallbackContext context) =>
-        OnCrouchRelease?.Invoke();
-
-    private void HandleChangeGun(InputAction.CallbackContext context) => OnChangeGun?.Invoke();
-
-    /// <summary>
-    /// Enable Player Input
-    /// </summary>
-    public void EnablePlayerInput()
-    {
-        InputActions?.FindActionMap(PlayerActionMap)?.Enable();
-    }
-
-    /// <summary>
-    /// Disable Player Input
-    /// </summary>
-    public void DisablePlayerInput()
-    {
-        InputActions?.FindActionMap(PlayerActionMap)?.Disable();
-    }
-
-    /// <summary>
-    /// Enable UI Input
-    /// </summary>
-    public void EnableUIInput()
-    {
-        InputActions?.FindActionMap(UIActionMap)?.Enable();
-    }
-
-    /// <summary>
-    /// Disable UI Input
-    /// </summary>
-    public void DisableUIInput()
-    {
-        InputActions?.FindActionMap(UIActionMap)?.Disable();
-    }
-
-    /// <summary>
-    /// Enable Dialogue Input
-    /// </summary>
-    public void EnableDialogueInput()
-    {
-        InputActions?.FindActionMap(DialogueActionMap)?.Enable();
-    }
-
-    /// <summary>
-    /// Disable Dialogue Input
-    /// </summary>
-    public void DisableDialogueInput()
-    {
-        InputActions?.FindActionMap(DialogueActionMap)?.Disable();
-    }
+	private void BindAction(string actionName, Action performed = null, Action canceled = null)
+	{
+		InputAction action = InputActions.FindAction(actionName);
+		if (action != null)
+		{
+			_bindings.Add(new ActionBinding(action, performed, canceled));
+		}
+		else
+		{
+			Debug.LogWarning($"InputManager: Could not find action '{actionName}'");
+		}
+	}
 }
