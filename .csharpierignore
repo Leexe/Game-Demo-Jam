@@ -1,0 +1,3 @@
+Assets/Lib/**/*.cs
+Assets/Plugins/**/*.cs
+Packages/**/*.cs
