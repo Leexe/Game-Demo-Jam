@@ -15,6 +15,13 @@ public class GameManager : MonoBehaviour
 	public float RunTime;
 	private Sequence _timeSlowSequence;
 
+	private void Start()
+	{
+		LockCursor();
+	}
+
+	// Cursor
+
 	public void LockCursor()
 	{
 		Cursor.lockState = CursorLockMode.Locked;
@@ -27,7 +34,7 @@ public class GameManager : MonoBehaviour
 		Cursor.visible = true;
 	}
 
-	// time
+	// Time
 
 	public void TimeSlow(float targetTimeSlow, float duration)
 	{

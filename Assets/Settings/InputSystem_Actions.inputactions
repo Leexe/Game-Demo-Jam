@@ -83,8 +83,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "3e91c3a4-a81b-4fdf-b192-05c9ffa7ad4a",
+                    "name": "forward",
+                    "id": "b5ca18e3-ab5a-4abf-8082-6b675802f2d0",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -94,8 +94,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "up",
-                    "id": "c89037a2-de87-433c-b1f9-6263edbd0c46",
+                    "name": "forward",
+                    "id": "6362dc5e-fd76-4288-bebb-2d840cd8dd8c",
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
@@ -105,9 +105,9 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
-                    "id": "f3fa4124-6fbb-412f-944c-fb73e4b764e5",
-                    "path": "<Keyboard>/s",
+                    "name": "backward",
+                    "id": "41ebaf54-b5b9-41fd-8500-5f2263939531",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -116,9 +116,9 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
-                    "id": "3e2fd15c-1550-4557-9c18-a12b068a16c8",
-                    "path": "<Keyboard>/downArrow",
+                    "name": "backward",
+                    "id": "14fb5015-15fb-4179-a9ff-ffd5eecb8d0f",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
