@@ -22,13 +22,13 @@ public class GameManager : MonoBehaviour
 
 	// Cursor
 
-	public void LockCursor()
+	public static void LockCursor()
 	{
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
 	}
 
-	public void UnlockCursor()
+	public static void UnlockCursor()
 	{
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
