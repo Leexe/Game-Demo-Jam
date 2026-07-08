@@ -34,7 +34,7 @@ Material:
     - _FogPixelResolution: 800
     - _FogScale: 1
     - _FogScrollSpeedX: 0.001
-    - _FogScrollSpeedY: 0.01
+    - _FogScrollSpeedY: 0.001
     - _FogSpeed: 0.005
     - _StarFlicker: 5
     - _StarGrid: 700
