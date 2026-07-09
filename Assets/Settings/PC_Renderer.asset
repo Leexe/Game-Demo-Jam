@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8049906087496706154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f54efd94bcf7bd43a040de64f3878af, type: 3}
+  m_Name: Outlines
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ToonShadersPro.URP.OutlineFeature
+  m_Active: 1
 --- !u!114 &-4613231407217938036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,6 +82,7 @@ MonoBehaviour:
   - {fileID: 7833122117494664109}
   - {fileID: -4613231407217938036}
   - {fileID: -610953294663210809}
+  - {fileID: -8049906087496706154}
   m_RendererFeatureMap: ad6b866f10d7b46c8c7119227a82fabfc7a83e29377585f7
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
