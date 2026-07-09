@@ -23,6 +23,7 @@ public class InputManager : PersistentMonoSingleton<InputManager>
 	public event Action OnCrouchPerformed;
 	public event Action OnCrouchRelease;
 	public event Action OnDashPerformed;
+	public event Action OnInteractPerformed;
 	public event Action OnReloadPerformed;
 	public event Action OnContinueStoryPerformed;
 	public event Action OnEscapePerformed;
@@ -78,6 +79,7 @@ public class InputManager : PersistentMonoSingleton<InputManager>
 		BindAction("Zoom", performed: () => OnZoomPerformed?.Invoke());
 		BindAction("Jump", performed: () => OnJumpPerformed?.Invoke());
 		BindAction("Dash", performed: () => OnDashPerformed?.Invoke());
+		BindAction("Interact", performed: () => OnInteractPerformed?.Invoke());
 		BindAction(
 			"Shoot",
 			performed: () => OnShootingPerformed?.Invoke(),
