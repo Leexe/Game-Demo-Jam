@@ -11,7 +11,8 @@ Material:
   m_Shader: {fileID: 4800000, guid: 725cb5a27801456380225c7aefea96ed, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - USE_8X8_DITHER
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -30,21 +31,21 @@ Material:
     m_Ints:
     - _Octaves: 10
     m_Floats:
-    - _FogDitherSpread: 0.05
-    - _FogPixelResolution: 800
+    - _FogDitherSpread: 0.09
+    - _FogPixelResolution: 2048
     - _FogScale: 1
     - _FogScrollSpeedX: 0.001
     - _FogScrollSpeedY: 0.001
     - _FogSpeed: 0.005
-    - _StarFlicker: 5
-    - _StarGrid: 700
-    - _StarOpacity: 0.5
-    - _StarPixelResolution: 800
-    - _StarProbability: 0.03
-    - _StarScrollSpeedX: 0.002
-    - _StarScrollSpeedY: 0.002
+    - _StarFlicker: 2
+    - _StarGrid: 140
+    - _StarOpacity: 0.4
+    - _StarPixelResolution: 2048
+    - _StarProbability: 0.1
+    - _StarScrollSpeedX: 0
+    - _StarScrollSpeedY: 0
     - _StarSize: 0.3
-    - _Use8x8Dither: 0
+    - _Use8x8Dither: 1
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
