@@ -188,17 +188,17 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0.05
   useNoiseOffsets:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   noiseScale:
     m_OverrideState: 1
-    m_Value: 50
+    m_Value: 361
   noiseOffset:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 8.83
   noiseStrength:
     m_OverrideState: 1
-    m_Value: 0.01
+    m_Value: 0.045
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
