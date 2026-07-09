@@ -1669,7 +1669,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 748e4d91e94d84351bcb05f500f0db9d, type: 2}
+  - {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1806,8 +1806,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 7.5
-      minScalar: 5
+      scalar: 10
+      minScalar: 7
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1977,8 +1977,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.6
-      minScalar: 0.25
+      scalar: 0.2
+      minScalar: 0.05
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2294,15 +2294,15 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 2000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.2
-      minScalar: 0.1
+      scalar: 0.04
+      minScalar: 0.01
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2362,7 +2362,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 50, y: 1, z: 50}
+    m_Scale: {x: 30, y: 1, z: 30}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -2560,7 +2560,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 200
+      scalar: 1000
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4379,8 +4379,8 @@ ParticleSystem:
     strength:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.25
+      scalar: 0.25
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
