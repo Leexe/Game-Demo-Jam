@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 	private void Start()
 	{
 		LockCursor();
+		AudioManager.Instance.PlayMusic(FMODEvents.Instance.WindowsXP_Bgm);
 	}
 
 	// Cursor

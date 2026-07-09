@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class NpcDialogueController : MonoBehaviour
@@ -6,18 +5,11 @@ public class NpcDialogueController : MonoBehaviour
 	[SerializeField]
 	private string _npcMainKnot;
 
-	private void OnEnable()
-	{
-		InputManager.Instance.OnInteractPerformed += OnInteract;
-	}
+	[field: SerializeField]
+	public Transform CameraLookPoint { get; private set; }
 
-	private void OnDisable()
+	public void StartStory()
 	{
-		if (InputManager.Instance != null)
-		{
-			InputManager.Instance.OnInteractPerformed -= OnInteract;
-		}
+		DialogueManager.Instance.DialogueState.StartStory(_npcMainKnot);
 	}
-
-	private void OnInteract() { }
 }

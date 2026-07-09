@@ -1,2 +1,2 @@
 INCLUDE Testing.ink
-INCLUDE CapKid.ink
+INCLUDE Kap.ink

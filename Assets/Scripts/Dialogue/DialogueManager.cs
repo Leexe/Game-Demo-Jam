@@ -10,7 +10,7 @@ using UnityEngine;
 /// <summary>
 ///     Acts as the bridge between Ink narrative scripts and Unity gameplay systems.
 /// </summary>
-public class DialogueController : MonoBehaviour
+public class DialogueManager : MonoSingleton<DialogueManager>
 {
 	[FoldoutGroup("References")]
 	[SerializeField]
@@ -36,9 +36,16 @@ public class DialogueController : MonoBehaviour
 
 	private bool ChoicesAvailable => _story.currentChoices.Count > 0;
 
+	#region Events
+
+	public event Action<string> OnDialogueStarted;
+	public event Action OnDialogueEnded;
+
+	#endregion
+
 	#region Unity Functions
 
-	private void Awake()
+	protected override void OnInitialized()
 	{
 		_story = new Story(_inkFile.storyJson);
 		InitializeTagHandlers();
@@ -145,6 +152,7 @@ public class DialogueController : MonoBehaviour
 		}
 
 		_storyPlaying = true;
+		OnDialogueStarted?.Invoke(knotName);
 
 		if (knotName == "")
 		{
@@ -230,6 +238,7 @@ public class DialogueController : MonoBehaviour
 		_typewriterPlaying = false;
 
 		DialogueState.EndStory();
+		OnDialogueEnded?.Invoke();
 	}
 
 	#endregion

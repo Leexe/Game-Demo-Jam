@@ -11,7 +11,7 @@ public class DialogueSFX : MonoBehaviour
 {
 	[FoldoutGroup("References")]
 	[SerializeField]
-	private DialogueController _dialogueController;
+	private DialogueManager _dialogueManager;
 
 	[FoldoutGroup("References")]
 	[SerializeField]
@@ -35,7 +35,7 @@ public class DialogueSFX : MonoBehaviour
 
 	private void OnEnable()
 	{
-		_dialogueState = _dialogueController.DialogueState;
+		_dialogueState = _dialogueManager.DialogueState;
 		_hiddenTypewriter.onCharacterVisible.AddListener(PlayVoice);
 		_dialogueState.OnStartDialogue += ResetVoiceState;
 		_dialogueState.OnEndStory += FadeOutVoice;
@@ -157,12 +157,7 @@ public class DialogueSFX : MonoBehaviour
 			return;
 		}
 
-		PlayAudioFromDictionary(
-			key,
-			_vnDictionary.MusicMap,
-			music => AudioManager.Instance.SwitchMusic(music),
-			"Music"
-		);
+		PlayAudioFromDictionary(key, _vnDictionary.MusicMap, music => AudioManager.Instance.PlayMusic(music), "Music");
 	}
 
 	/// <summary>

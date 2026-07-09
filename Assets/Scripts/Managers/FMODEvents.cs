@@ -9,9 +9,9 @@ public class FMODEvents : MonoSingleton<FMODEvents>
 {
 	#region Music
 
-	// [field: SerializeField]
-	// [field: FoldoutGroup("Music", true)]
-	// public EventReference FightingGame_Bgm { get; private set; }
+	[field: SerializeField]
+	[field: FoldoutGroup("Music", true)]
+	public EventReference WindowsXP_Bgm { get; private set; }
 
 	#endregion
 
@@ -25,17 +25,33 @@ public class FMODEvents : MonoSingleton<FMODEvents>
 
 	#region SFX
 
-	// [field: SerializeField]
-	// [field: FoldoutGroup("SFX")]
-	// public EventReference Jump_Sfx { get; private set; }
+	[field: SerializeField]
+	[field: FoldoutGroup("SFX")]
+	public EventReference Footsteps_Sfx { get; private set; }
+
+	[field: SerializeField]
+	[field: FoldoutGroup("SFX")]
+	public EventReference Jump_Sfx { get; private set; }
+
+	[field: SerializeField]
+	[field: FoldoutGroup("SFX")]
+	public EventReference LightCandle_Sfx { get; private set; }
+
+	[field: SerializeField]
+	[field: FoldoutGroup("SFX")]
+	public EventReference BeachBall_Sfx { get; private set; }
+
+	[field: SerializeField]
+	[field: FoldoutGroup("SFX")]
+	public EventReference ButtonClick_Sfx { get; private set; }
 
 	#endregion
 
 	#region Looping SFX
 
-	// [field: SerializeField]
-	// [field: FoldoutGroup("Loop SFX", true)]
-	// public EventReference Lose_LoopSFX { get; private set; }
+	[field: SerializeField]
+	[field: FoldoutGroup("Loop SFX", true)]
+	public EventReference Falling_LoopSfx { get; private set; }
 
 	#endregion
 }
