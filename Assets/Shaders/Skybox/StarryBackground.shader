@@ -2,6 +2,11 @@ Shader "Skybox/StarryBackground"
 {
     Properties
     {
+        [Header(Toggles)]
+        [Toggle(ENABLE_FOG)] _EnableFog ("Enable Fog", Float) = 1
+        [Toggle(ENABLE_STARS)] _EnableStars ("Enable Stars", Float) = 1
+        [Toggle(ENABLE_MOON)] _EnableMoon ("Enable Moon", Float) = 1
+
         [Header(Scrolling)]
         [Tooltip(Controls how fast the fog moves horizontally)]
         _FogScrollSpeedX ("Fog Scroll Speed X", Float) = 0.0
@@ -28,6 +33,14 @@ Shader "Skybox/StarryBackground"
         [Tooltip(Controls the intensity of the dithering)]
         _FogDitherSpread ("Fog Dither Spread", Range(0, 1)) = 0.05
 
+        [Header(Galaxy)]
+        [Tooltip(Intensity of the galactic band across the sky)]
+        _GalaxyBandIntensity ("Galaxy Band Intensity", Range(0, 2)) = 1.0
+        [Tooltip(Width of the galactic band)]
+        _GalaxyBandWidth ("Galaxy Band Width", Range(0.1, 5.0)) = 1.5
+        [Tooltip(Tilt of the galactic band)]
+        _GalaxyBandPitch ("Galaxy Band Pitch", Range(-1.57, 1.57)) = 0.5
+
         [Header(Stars)]
         [Tooltip(The density of the star grid)]
         _StarGrid ("Star Grid", Range(1, 1000)) = 700.0
@@ -39,6 +52,12 @@ Shader "Skybox/StarryBackground"
         _StarProbability ("Star Probability", Range(0.0, 1.0)) = 0.02
         [Tooltip(The speed of the star twinkling)]
         _StarFlicker ("Star Flicker", Float) = 3
+        [Tooltip(First star color)]
+        [HDR] _StarColor1 ("Star Color 1", Color) = (0.6, 0.8, 1.0, 1.0)
+        [Tooltip(Second star color)]
+        [HDR] _StarColor2 ("Star Color 2", Color) = (1.0, 0.7, 0.4, 1.0)
+        [Tooltip(How much the stars are colorized, blending color 1 and color 2)]
+        _StarColorSaturation ("Star Color Saturation", Range(0.0, 1.0)) = 0.5
 
         [Header(Moon)]
         [Tooltip(The moon texture)]
@@ -72,6 +91,9 @@ Shader "Skybox/StarryBackground"
             #pragma vertex vert
             #pragma fragment frag
             #pragma shader_feature USE_8X8_DITHER
+            #pragma shader_feature ENABLE_FOG
+            #pragma shader_feature ENABLE_STARS
+            #pragma shader_feature ENABLE_MOON
 
             #include "UnityCG.cginc"
             #include "Assets/Shaders/Utility/Fbm.hlsl"
@@ -92,18 +114,25 @@ Shader "Skybox/StarryBackground"
             UNITY_DECLARE_TEX2D(_FogColorRamp);
             float _FogScrollSpeedX;
             float _FogScrollSpeedY;
-
             float _FogPixelResolution;
-            float _StarPixelResolution;
             int _Octaves;
+            float _FogScale;
+            float _FogSpeed;
+            float _FogDitherSpread;
+
+            float _StarPixelResolution;
             float _StarGrid;
             float _StarSize;
             float _StarProbability;
             float _StarOpacity;
-            float _FogScale;
-            float _FogSpeed;
-            float _FogDitherSpread;
             float _StarFlicker;
+            float _StarColorSaturation;
+            float4 _StarColor1;
+            float4 _StarColor2;
+
+            float _GalaxyBandIntensity;
+            float _GalaxyBandWidth;
+            float _GalaxyBandPitch;
 
             UNITY_DECLARE_TEX2D(_MoonTex);
             float4 _MoonDir;
@@ -136,8 +165,8 @@ Shader "Skybox/StarryBackground"
                 float3 fogPixelDir = floor(fogDir * _FogPixelResolution) / _FogPixelResolution;
 
                 // Dithering
-                int ditherX = (int)screenPos.x;
-                int ditherY = (int)screenPos.y;
+                uint ditherX = (uint)screenPos.x;
+                uint ditherY = (uint)screenPos.y;
 #ifdef USE_8X8_DITHER
                 float dither = bayerMatrix8x8[(ditherX % 8) + (ditherY % 8) * 8];
 #else
@@ -149,6 +178,13 @@ Shader "Skybox/StarryBackground"
                 float offset = fbm(fogPixelDir * _FogScale + float3(0, 0, _Time.y * _FogSpeed), _Octaves);
                 fogNoise += fbm(fogPixelDir + offset + float3(0, 0, _Time.y * _FogSpeed), _Octaves);
                 
+                // Galaxy Band
+                float s = sin(_GalaxyBandPitch);
+                float c = cos(_GalaxyBandPitch);
+                float tiltedY = dir.y * c - dir.x * s;
+                float band = 1.0 - smoothstep(0.0, _GalaxyBandWidth, abs(tiltedY));
+                fogNoise = lerp(fogNoise, fogNoise * (band * 3.0), _GalaxyBandIntensity);
+
                 // Sample Color From Color Ramp
                 return UNITY_SAMPLE_TEX2D(_FogColorRamp, float2(fogNoise, 0.5)).rgb;
             }
@@ -173,7 +209,7 @@ Shader "Skybox/StarryBackground"
                 float3 starOffset = starLocal3D - float3(oX, oY, oZ);
                 
                 // 5) Draw a small dot for star
-                float starShape = smoothstep(_StarSize, 0.0, length(starOffset));
+                float starShape = 1.0 - smoothstep(0.0, _StarSize, length(starOffset));
                 float star = starShape * step(1.0 - _StarProbability, randomStar);
                 
                 // 6) Make stars twinkle
@@ -181,7 +217,13 @@ Shader "Skybox/StarryBackground"
                 float twinklePhase = hash31(twinkleCell + float3(77.7, 33.3, 55.5));
                 float twinkle = sin(_Time.y * _StarFlicker + twinklePhase * UNITY_TWO_PI) * 0.5 + 0.5;
                 
-                return star * twinkle * _StarOpacity;
+                // 7) Star Colors
+                float colorHash = hash31(starGridCell + float3(99.9, 11.1, 22.2));
+                float3 white = float3(1.0, 1.0, 1.0);
+                float3 baseStarColor = lerp(_StarColor1.rgb, _StarColor2.rgb, colorHash);
+                float3 finalStarColor = lerp(white, baseStarColor, _StarColorSaturation);
+                
+                return finalStarColor * star * twinkle * _StarOpacity;
             }
 
             void CalculateMoon(float3 dir, out float3 moonTex, out float moonAlpha, out float3 glowColor)
@@ -203,8 +245,8 @@ Shader "Skybox/StarryBackground"
                 moonTex = moonTexSample.rgb * _MoonColor.rgb;
                 moonAlpha = moonTexSample.a * _MoonColor.a * boxMask;
                 
-                // Soft glow around the moon
-                float glow = smoothstep(_MoonSize * _MoonGlowSize, _MoonSize, moonDist) * _MoonGlow;
+                // Glow around the moon
+                float glow = (1.0 - smoothstep(_MoonSize, _MoonSize * _MoonGlowSize, moonDist)) * _MoonGlow;
                 glowColor = _MoonColor.rgb * glow;
             }
 
@@ -212,13 +254,22 @@ Shader "Skybox/StarryBackground"
             {
                 float3 dir = normalize(i.viewDir);
 
-                float3 fbmColor = CalculateFog(dir, i.vertex.xy);
-                float3 stars = CalculateStars(dir);
+                float3 fbmColor = float3(0.0, 0.0, 0.0);
+#ifdef ENABLE_FOG
+                fbmColor = CalculateFog(dir, i.vertex.xy);
+#endif
+                
+                float3 stars = float3(0.0, 0.0, 0.0);
+#ifdef ENABLE_STARS
+                stars = CalculateStars(dir);
+#endif
 
-                float3 moonTex;
-                float moonAlpha;
-                float3 glowColor;
+                float3 moonTex = float3(0.0, 0.0, 0.0);
+                float moonAlpha = 0.0;
+                float3 glowColor = float3(0.0, 0.0, 0.0);
+#ifdef ENABLE_MOON
                 CalculateMoon(dir, moonTex, moonAlpha, glowColor);
+#endif
 
                 float3 col = fbmColor + stars * (1.0 - moonAlpha);
                 col = lerp(col, moonTex, moonAlpha);

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: StarrySkybox
+  m_Name: GalaxySkybox
   m_Shader: {fileID: 4800000, guid: 725cb5a27801456380225c7aefea96ed, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -41,15 +41,15 @@ Material:
     - _EnableFog: 1
     - _EnableMoon: 1
     - _EnableStars: 1
-    - _FogDitherSpread: 0.274
+    - _FogDitherSpread: 0.105
     - _FogPixelResolution: 2048
-    - _FogScale: 2
+    - _FogScale: 1
     - _FogScrollSpeedX: 0.001
     - _FogScrollSpeedY: 0.001
     - _FogSpeed: 0.005
-    - _GalaxyBandIntensity: 0.62
-    - _GalaxyBandPitch: 0
-    - _GalaxyBandWidth: 0.69
+    - _GalaxyBandIntensity: 0
+    - _GalaxyBandPitch: -1.57
+    - _GalaxyBandWidth: 0.1
     - _MoonGlow: 0.04
     - _MoonGlowSize: 3.3
     - _MoonSize: 0.048
@@ -65,7 +65,7 @@ Material:
     - _Use8x8Dither: 1
     m_Colors:
     - _MoonColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MoonDir: {r: -0.59, g: 1.49, b: 0.69, a: 0}
+    - _MoonDir: {r: 0.99, g: 1.65, b: 0.5, a: 0}
     - _StarColor1: {r: 0.6, g: 0.8, b: 1, a: 1}
     - _StarColor2: {r: 1, g: 0.7, b: 0.4, a: 1}
   m_BuildTextureStacks: []
