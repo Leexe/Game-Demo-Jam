@@ -56,7 +56,7 @@ public class InteractionController : MonoBehaviour
 		var ray = new Ray(_mainCamera.transform.position, _mainCamera.transform.forward);
 		bool hitInteractable = Physics.Raycast(
 			ray,
-			out RaycastHit hit,
+			out RaycastHit _,
 			_interactDistance,
 			_interactionLayerMask | _npcLayerMask
 		);
@@ -86,12 +86,19 @@ public class InteractionController : MonoBehaviour
 			NpcDialogueController npcDialogueController = hit.collider.GetComponent<NpcDialogueController>();
 			if (npcDialogueController != null)
 			{
+				// Trigger Event
+				GameManager.Instance.TriggerOnInteractableExit();
+
+				// Disable Input
+				InputManager.Instance.DisablePlayerInput();
+
+				// Start Dialogue
+				npcDialogueController.StartStory();
+
+				// Move Camera
 				CameraManager.Instance.FocusOn(npcDialogueController.CameraLookPoint);
 
-				GameManager.Instance.TriggerOnInteractableExit();
 				_isLookingAtInteractable = false;
-
-				npcDialogueController.StartStory();
 				_isTalking = true;
 			}
 			else
@@ -105,6 +112,7 @@ public class InteractionController : MonoBehaviour
 	{
 		CameraManager.Instance.ClearFocus();
 		_isTalking = false;
+		InputManager.Instance.EnablePlayerInput();
 		HandleRayCasts(true);
 	}
 }
