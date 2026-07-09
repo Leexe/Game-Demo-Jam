@@ -315,7 +315,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22400762, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.000015258789
       objectReference: {fileID: 0}
     - target: {fileID: 22426080, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1039,56 +1039,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &466220827 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5537215545421625865, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
-  m_PrefabInstance: {fileID: 6696221303150975396}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &466220828 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7367937203504357259, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
-  m_PrefabInstance: {fileID: 6696221303150975396}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 466220827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7cb94802ac604dedb9a8c65e2ad268d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MyCharacterController
---- !u!114 &466220832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 466220827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ed4ead2690d4bacba49b92bed7176d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractionController
-  _interactDistance: 5
-  _interactionLayerMask:
-    serializedVersion: 2
-    m_Bits: 192
-  _npcLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
---- !u!114 &466220833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 466220827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 806e67b2860844379eaa1ff68b40707a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerSfxController
-  _characterController: {fileID: 466220828}
-  _fallingSfxThreshold: 0.75
-  _footstepDistance: 3.5
 --- !u!1 &546811532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1932,7 +1882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _interactTransform: {fileID: 1284033909}
-  _lowerValue: 150
+  _lowerValue: 200
   _shiftUpDuration: 0.3
   _shiftUpDialogueDuration: 1.35
   _shiftDownDuration: 0.5
@@ -2190,11 +2140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 424157165012558962, guid: ae91ebf63bdc749ef8a30cd968a432e7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 633303706826405957, guid: ae91ebf63bdc749ef8a30cd968a432e7, type: 3}
-      propertyPath: m_Color.a
-      value: 1
+      value: -0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 2382799599912282527, guid: ae91ebf63bdc749ef8a30cd968a432e7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2250,10 +2196,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6149015882407524222, guid: ae91ebf63bdc749ef8a30cd968a432e7, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6748709315100956854, guid: ae91ebf63bdc749ef8a30cd968a432e7, type: 3}
-      propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7228143630980288931, guid: ae91ebf63bdc749ef8a30cd968a432e7, type: 3}
@@ -3064,146 +3006,6 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <Jump_Sfx>k__BackingField.Path
-      value: event:/SFX/Gameplay/Jump
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <BeachBall_Sfx>k__BackingField.Path
-      value: event:/SFX/NPCs/Beach Ball/Initiate
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <Footsteps_Sfx>k__BackingField.Path
-      value: event:/SFX/Gameplay/Footsteps
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <WindowsXP_Bgm>k__BackingField.Path
-      value: event:/BGM/XP
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <Jump_Sfx>k__BackingField.Guid.Data1
-      value: 2044512272
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <Jump_Sfx>k__BackingField.Guid.Data2
-      value: 1282485448
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <Jump_Sfx>k__BackingField.Guid.Data3
-      value: -981366595
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <Jump_Sfx>k__BackingField.Guid.Data4
-      value: -1806114300
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <ButtonClick_Sfx>k__BackingField.Path
-      value: event:/SFX/NPCs/Menu UI/Button Click
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <Falling_LoopSfx>k__BackingField.Path
-      value: event:/SFX/Gameplay/Falling
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <LightCandle_Sfx>k__BackingField.Path
-      value: event:/SFX/Gameplay/Light Candle
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <BeachBall_Sfx>k__BackingField.Guid.Data1
-      value: -680606334
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <BeachBall_Sfx>k__BackingField.Guid.Data2
-      value: 1116726839
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <BeachBall_Sfx>k__BackingField.Guid.Data3
-      value: 1059012239
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <BeachBall_Sfx>k__BackingField.Guid.Data4
-      value: 2056646742
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <Footsteps_Sfx>k__BackingField.Guid.Data1
-      value: -509962723
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <Footsteps_Sfx>k__BackingField.Guid.Data2
-      value: 1269375412
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <Footsteps_Sfx>k__BackingField.Guid.Data3
-      value: -1956337279
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <Footsteps_Sfx>k__BackingField.Guid.Data4
-      value: -1309143252
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <WindowsXP_Bgm>k__BackingField.Guid.Data1
-      value: -1851401168
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <WindowsXP_Bgm>k__BackingField.Guid.Data2
-      value: 1220991660
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <WindowsXP_Bgm>k__BackingField.Guid.Data3
-      value: 1151980435
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <WindowsXP_Bgm>k__BackingField.Guid.Data4
-      value: -701287664
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <ButtonClick_Sfx>k__BackingField.Guid.Data1
-      value: -699829950
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <ButtonClick_Sfx>k__BackingField.Guid.Data2
-      value: 1128432670
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <ButtonClick_Sfx>k__BackingField.Guid.Data3
-      value: 1674792868
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <ButtonClick_Sfx>k__BackingField.Guid.Data4
-      value: -1289976302
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <Falling_LoopSfx>k__BackingField.Guid.Data1
-      value: -1477203512
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <Falling_LoopSfx>k__BackingField.Guid.Data2
-      value: 1136147767
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <Falling_LoopSfx>k__BackingField.Guid.Data3
-      value: -367710067
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <Falling_LoopSfx>k__BackingField.Guid.Data4
-      value: 569867649
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <LightCandle_Sfx>k__BackingField.Guid.Data1
-      value: -810871197
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <LightCandle_Sfx>k__BackingField.Guid.Data2
-      value: 1342002607
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <LightCandle_Sfx>k__BackingField.Guid.Data3
-      value: -153892735
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483737070969919499, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
-      propertyPath: <LightCandle_Sfx>k__BackingField.Guid.Data4
-      value: 1745313007
-      objectReference: {fileID: 0}
     - target: {fileID: 1626531797647931155, guid: a2a21ebae9a374f7e9c2bb8ff19ded15, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3434,13 +3236,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5537215545421625865, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 466220832}
-    - targetCorrespondingSourceObject: {fileID: 5537215545421625865, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 466220833}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
