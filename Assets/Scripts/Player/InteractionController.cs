@@ -14,6 +14,8 @@ public class InteractionController : MonoBehaviour
 	private LayerMask _npcLayerMask;
 
 	private Camera _mainCamera;
+	private bool _isLookingAtInteractable;
+	private bool _isTalking;
 
 	private void Start()
 	{
@@ -39,6 +41,38 @@ public class InteractionController : MonoBehaviour
 		}
 	}
 
+	private void Update()
+	{
+		HandleRayCasts(false);
+	}
+
+	private void HandleRayCasts(bool isAfterDialogue)
+	{
+		if (_isTalking)
+		{
+			return;
+		}
+
+		var ray = new Ray(_mainCamera.transform.position, _mainCamera.transform.forward);
+		bool hitInteractable = Physics.Raycast(
+			ray,
+			out RaycastHit hit,
+			_interactDistance,
+			_interactionLayerMask | _npcLayerMask
+		);
+
+		if (hitInteractable && !_isLookingAtInteractable)
+		{
+			_isLookingAtInteractable = true;
+			GameManager.Instance.TriggerOnInteractableEnter(isAfterDialogue);
+		}
+		else if (!hitInteractable && _isLookingAtInteractable)
+		{
+			_isLookingAtInteractable = false;
+			GameManager.Instance.TriggerOnInteractableExit();
+		}
+	}
+
 	private void OnInteract()
 	{
 		if (DialogueManager.Instance == null)
@@ -54,7 +88,11 @@ public class InteractionController : MonoBehaviour
 			{
 				CameraManager.Instance.FocusOn(npcDialogueController.CameraLookPoint);
 
+				GameManager.Instance.TriggerOnInteractableExit();
+				_isLookingAtInteractable = false;
+
 				npcDialogueController.StartStory();
+				_isTalking = true;
 			}
 			else
 			{
@@ -66,5 +104,7 @@ public class InteractionController : MonoBehaviour
 	private void OnDialogueEnded()
 	{
 		CameraManager.Instance.ClearFocus();
+		_isTalking = false;
+		HandleRayCasts(true);
 	}
 }

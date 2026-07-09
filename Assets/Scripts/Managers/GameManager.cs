@@ -1,7 +1,8 @@
+using System;
 using PrimeTween;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
 	private static float _baseTimeScale = 1f; // set by console commands
 	private static float _simulationTimeScale = 1f; // gameplay
@@ -14,6 +15,23 @@ public class GameManager : MonoBehaviour
 
 	public float RunTime;
 	private Sequence _timeSlowSequence;
+
+	// Events
+
+	public Action<bool> OnInteractableEnter;
+	public Action OnInteractableExit;
+
+	public void TriggerOnInteractableEnter(bool isAfterDialogue = false)
+	{
+		OnInteractableEnter?.Invoke(isAfterDialogue);
+	}
+
+	public void TriggerOnInteractableExit()
+	{
+		OnInteractableExit?.Invoke();
+	}
+
+	// Unity Functions
 
 	private void Start()
 	{
