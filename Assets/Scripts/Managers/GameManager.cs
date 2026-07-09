@@ -18,7 +18,10 @@ public class GameManager : MonoSingleton<GameManager>
 
 	// Events
 
+	[HideInInspector]
 	public Action<bool> OnInteractableEnter;
+
+	[HideInInspector]
 	public Action OnInteractableExit;
 
 	public void TriggerOnInteractableEnter(bool isAfterDialogue = false)
