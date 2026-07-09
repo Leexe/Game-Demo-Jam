@@ -1,4 +1,4 @@
-Shader "Unlit/StarryBackground"
+Shader "Skybox/StarryBackground"
 {
     Properties
     {
@@ -7,10 +7,7 @@ Shader "Unlit/StarryBackground"
         _FogScrollSpeedX ("Fog Scroll Speed X", Float) = 0.0
         [Tooltip(Controls how fast the fog moves vertically)]
         _FogScrollSpeedY ("Fog Scroll Speed Y", Float) = 0.1
-        [Tooltip(Controls how fast the stars move horizontally)]
-        _StarScrollSpeedX ("Star Scroll Speed X", Float) = 0.0
-        [Tooltip(Controls how fast the stars move vertically)]
-        _StarScrollSpeedY ("Star Scroll Speed Y", Float) = 0.1
+
 
         [Header(Resolution)]
         [Tooltip(The pixelation resolution for fog. Lower values will pixelate)]
@@ -47,10 +44,13 @@ Shader "Unlit/StarryBackground"
     {
         Tags
         {
-            "RenderType"="Opaque"
-            "PreviewType"="Plane"
+            "Queue"="Background"
+            "RenderType"="Background"
+            "PreviewType"="Skybox"
         }
         LOD 100
+        Cull Off
+        ZWrite Off
 
         Pass
         {
@@ -67,20 +67,18 @@ Shader "Unlit/StarryBackground"
             struct MeshData
             {
                 float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
             };
 
             struct Interpolators
             {
-                float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float3 viewDir : TEXCOORD0;
             };
 
             UNITY_DECLARE_TEX2D(_FogColorRamp);
             float _FogScrollSpeedX;
             float _FogScrollSpeedY;
-            float _StarScrollSpeedX;
-            float _StarScrollSpeedY;
+
             float _FogPixelResolution;
             float _StarPixelResolution;
             int _Octaves;
@@ -97,28 +95,30 @@ Shader "Unlit/StarryBackground"
             {
                 Interpolators o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.viewDir = v.vertex.xyz;
                 return o;
+            }
+
+            float hash31(float3 p)
+            {
+                p = frac(p * float3(443.897, 441.423, 437.195));
+                p += dot(p, p.yzx + 19.19);
+                return frac((p.x + p.y) * p.z);
             }
 
             fixed4 frag(Interpolators i) : SV_Target
             {
-                float aspect = _ScreenParams.x / _ScreenParams.y;
-                // Panning
-                float2 fogPannedUV = i.uv;
-                fogPannedUV.x += _Time.y * _FogScrollSpeedX;
-                fogPannedUV.y += _Time.y * _FogScrollSpeedY;
-                float2 starPannedUV = i.uv;
-                starPannedUV.x += _Time.y * _StarScrollSpeedX;
-                starPannedUV.y += _Time.y * _StarScrollSpeedY;
+                float3 dir = normalize(i.viewDir);
 
-                // Pixelation
-                float2 fogPixelUV = floor(fogPannedUV * _FogPixelResolution * float2(aspect, 1.0)) / _FogPixelResolution / aspect;
-                float2 starPixelUV = floor(starPannedUV * _StarPixelResolution * float2(aspect, 1.0)) / _StarPixelResolution / aspect;
+                float3 fogDir = dir;
+                fogDir.x += _Time.y * _FogScrollSpeedX;
+                fogDir.y += _Time.y * _FogScrollSpeedY;
 
-                // Dithering Fog
-                int ditherX = i.uv.x * _FogPixelResolution * aspect;
-                int ditherY = i.uv.y * _FogPixelResolution;
+                float3 fogPixelDir = floor(fogDir * _FogPixelResolution) / _FogPixelResolution;
+
+                // Dithering
+                int ditherX = (int)i.vertex.x;
+                int ditherY = (int)i.vertex.y;
 #ifdef USE_8X8_DITHER
                 float dither = bayerMatrix8x8[(ditherX % 8) + (ditherY % 8) * 8];
 #else
@@ -127,26 +127,38 @@ Shader "Unlit/StarryBackground"
                 float fogNoise = (dither - 0.5) * _FogDitherSpread;
 
                 // FBM Fog
-                float offset = fbm(float3(_FogScale * fogPixelUV, _Time.y * _FogSpeed), _Octaves);
-                fogNoise += fbm(float3(fogPixelUV + offset, _Time.y * _FogSpeed), _Octaves);
+                float offset = fbm(fogPixelDir * _FogScale + float3(0, 0, _Time.y * _FogSpeed), _Octaves);
+                fogNoise += fbm(fogPixelDir + offset + float3(0, 0, _Time.y * _FogSpeed), _Octaves);
+
                 // Sample Color From Color Ramp
                 float3 fbmColor = UNITY_SAMPLE_TEX2D(_FogColorRamp, float2(fogNoise, 0.5)).rgb;
 
                 // Stars
-                // 1) Create Grid
-                float2 starGrid = floor(starPixelUV * _StarGrid);
-                // 2) Rescale Simplex Noise to be in range [0, 1]
-                float randomStar = SimplexNoise(starGrid * 0.314 + 0.5) * 0.5 + 0.5;
+                float3 starPixelDir = floor(dir * _StarPixelResolution) / _StarPixelResolution;
+
+                // 1) Create 3D grid
+                float3 starGridCell = floor(starPixelDir * _StarGrid);
+                float3 starLocal3D = frac(starPixelDir * _StarGrid) - 0.5;
+
+                // 2) Random value per cell
+                float randomStar = hash31(starGridCell);
+
                 // 3) Offset the center of the star within each cell
-                float offsetX = SimplexNoise(starGrid * 0.314 + float2(13.5, 0.0)) * 0.4;
-                float offsetY = SimplexNoise(starGrid * 0.314 + float2(0.0, 42.7)) * 0.4;
-                // 4) Get the local position of the star within the cell
-                float2 starLocal = frac(starPixelUV * _StarGrid) - 0.5 - float2(offsetX, offsetY);
+                float oX = hash31(starGridCell + float3(13.5, 0.0, 7.3)) * 0.8 - 0.4;
+                float oY = hash31(starGridCell + float3(0.0, 42.7, 3.1)) * 0.8 - 0.4;
+                float oZ = hash31(starGridCell + float3(5.2, 0.0, 91.4)) * 0.8 - 0.4;
+
+                // 4) Get local position relative to the offset star center
+                float3 starOffset = starLocal3D - float3(oX, oY, oZ);
+
                 // 5) Draw a small dot for star
-                float starShape = smoothstep(_StarSize, 0.0, length(starLocal));
+                float starShape = smoothstep(_StarSize, 0.0, length(starOffset));
                 float star = starShape * step(1.0 - _StarProbability, randomStar);
+
                 // 6) Make stars twinkle
-                float twinkle = sin(_Time.y * _StarFlicker + randomStar * 1000.0) * 0.5 + 0.5;
+                float3 twinkleCell = floor(dir * _StarGrid);
+                float twinklePhase = hash31(twinkleCell + float3(77.7, 33.3, 55.5));
+                float twinkle = sin(_Time.y * _StarFlicker + twinklePhase * UNITY_TWO_PI) * 0.5 + 0.5;
                 float3 stars = star * twinkle * _StarOpacity;
 
                 return float4(fbmColor + stars, 1.0);
