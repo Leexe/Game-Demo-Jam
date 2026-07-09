@@ -6,17 +6,6 @@ Shader "Fullscreen/RetroShader"
         _PixelSize ("Pixel Size", Vector) = (4, 4, 0, 0)
 
         [Header(Color Settings)]
-        [KeywordEnum(None, ColorRamp, LUT)]
-        _ColorMode ("Color Mode", Float) = 0
-
-        [Tooltip(The color gradient applied to the screen)]
-        [NoScaleOffset] 
-        _ColorRamp ("Color Ramp", 2D) = "white" {}
-
-        [Tooltip(A 3D Texture representing the color palette)]
-        [NoScaleOffset] 
-        _PaletteLUT ("Palette LUT", 3D) = "" {}
-
         _ColorDepth ("Color Depth", Range(2, 64)) = 8
 
         [Header(Dithering)]
@@ -46,7 +35,6 @@ Shader "Fullscreen/RetroShader"
             HLSLPROGRAM
             #pragma vertex Vert
             #pragma fragment frag
-            #pragma multi_compile _COLORMODE_NONE _COLORMODE_COLORRAMP _COLORMODE_LUT
             #pragma multi_compile _BAYERMATRIX_2X2 _BAYERMATRIX_4X4 _BAYERMATRIX_8X8
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
@@ -58,11 +46,6 @@ Shader "Fullscreen/RetroShader"
             float _DitherSpread;
             float _DitherStrength;
             float _DitherDarken;
-            TEXTURE2D(_ColorRamp);
-            SAMPLER(sampler_ColorRamp);
-            TEXTURE3D(_PaletteLUT);
-            SAMPLER(sampler_PaletteLUT);
-
             half4 frag(Varyings i) : SV_Target
             {
                 // Pixelization
@@ -90,15 +73,7 @@ Shader "Fullscreen/RetroShader"
                 col.rgb += dither * _DitherStrength - _DitherDarken;
 
                 // Quantization
-#if defined(_COLORMODE_LUT)
-                col.rgb = saturate(col.rgb);
-                col.rgb = SAMPLE_TEXTURE3D(_PaletteLUT, sampler_PaletteLUT, col.rgb).rgb;
-#elif defined(_COLORMODE_COLORRAMP)
-                float luminance = saturate(Luminance(col.rgb));
-                col.rgb = SAMPLE_TEXTURE2D(_ColorRamp, sampler_ColorRamp, float2(luminance, 0.5)).rgb;
-#else
                 col.rgb = round(col.rgb * _ColorDepth) / _ColorDepth;
-#endif
 
                 // Convert to Linear
                 col.rgb = SRGBToLinear(col.rgb);
