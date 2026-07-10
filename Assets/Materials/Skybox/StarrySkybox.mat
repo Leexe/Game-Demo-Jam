@@ -45,17 +45,17 @@ Material:
     - _FogDitherSpread: 0.274
     - _FogPixelResolution: 2048
     - _FogScale: 2
-    - _FogScrollSpeedX: 0.001
-    - _FogScrollSpeedY: 0.001
-    - _FogSpeed: 0.005
-    - _GalaxyBandIntensity: 0.62
+    - _FogScrollSpeedX: 0.002
+    - _FogScrollSpeedY: -0.002
+    - _FogSpeed: 0.015
+    - _GalaxyBandIntensity: 0.5
     - _GalaxyBandPitch: 0
-    - _GalaxyBandWidth: 0.69
+    - _GalaxyBandWidth: 0.46
     - _MoonGlow: 0.04
     - _MoonGlowSize: 4.1
     - _MoonSize: 0.048
-    - _StarColorSaturation: 1
-    - _StarFlicker: 2
+    - _StarColorSaturation: 0.75
+    - _StarFlicker: 5
     - _StarGrid: 140
     - _StarOpacity: 0.4
     - _StarPixelResolution: 2048
