@@ -60,6 +60,8 @@ Shader "Skybox/StarryBackground"
         _StarColorSaturation ("Star Color Saturation", Range(0.0, 1.0)) = 0.5
 
         [Header(Moon)]
+        [Toggle(USE_SUN_SOURCE_DIR)] 
+        _UseSunSourceDir ("Use Sun Source Direction", Float) = 1
         [Tooltip(The moon texture)]
         _MoonTex ("Moon Texture", 2D) = "black" {}
         [Tooltip(The direction the moon appears in the sky)]
@@ -94,6 +96,7 @@ Shader "Skybox/StarryBackground"
             #pragma shader_feature ENABLE_FOG
             #pragma shader_feature ENABLE_STARS
             #pragma shader_feature ENABLE_MOON
+            #pragma shader_feature USE_SUN_SOURCE_DIR
 
             #include "UnityCG.cginc"
             #include "Assets/Shaders/Utility/Fbm.hlsl"
@@ -135,6 +138,7 @@ Shader "Skybox/StarryBackground"
             float _GalaxyBandPitch;
 
             UNITY_DECLARE_TEX2D(_MoonTex);
+            float _UseSunSourceDir;
             float4 _MoonDir;
             float _MoonSize;
             float4 _MoonColor;
@@ -228,7 +232,12 @@ Shader "Skybox/StarryBackground"
 
             void CalculateMoon(float3 dir, out float3 moonTex, out float moonAlpha, out float3 glowColor)
             {
+#ifdef USE_SUN_SOURCE_DIR
+                // _WorldSpaceLightPos0.xyz is automatically set by Unity to the direction of the active Sun Source
+                float3 moonDir = normalize(_WorldSpaceLightPos0.xyz);
+#else
                 float3 moonDir = normalize(_MoonDir.xyz);
+#endif
                 float moonDist = acos(saturate(dot(dir, moonDir)));
                 
                 // Project view direction onto moon disc

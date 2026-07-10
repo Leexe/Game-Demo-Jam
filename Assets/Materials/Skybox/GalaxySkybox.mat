@@ -63,6 +63,7 @@ Material:
     - _StarScrollSpeedY: 0
     - _StarSize: 0.3
     - _Use8x8Dither: 1
+    - _UseSunSourceDir: 0
     m_Colors:
     - _MoonColor: {r: 1, g: 1, b: 1, a: 1}
     - _MoonDir: {r: 0.99, g: 1.65, b: 0.5, a: 0}
