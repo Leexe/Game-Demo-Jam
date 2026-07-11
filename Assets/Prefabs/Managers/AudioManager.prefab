@@ -53,6 +53,55 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  <WindowsXP_Bgm>k__BackingField:
+    Guid:
+      Data1: -1851401168
+      Data2: 1220991660
+      Data3: 1151980435
+      Data4: -701287664
+    Path: event:/BGM/XP
+  <Footsteps_Sfx>k__BackingField:
+    Guid:
+      Data1: -509962723
+      Data2: 1269375412
+      Data3: -1956337279
+      Data4: -1309143252
+    Path: event:/SFX/Gameplay/Footsteps
+  <Jump_Sfx>k__BackingField:
+    Guid:
+      Data1: 2044512272
+      Data2: 1282485448
+      Data3: -981366595
+      Data4: -1806114300
+    Path: event:/SFX/Gameplay/Jump
+  <LightCandle_Sfx>k__BackingField:
+    Guid:
+      Data1: -810871197
+      Data2: 1342002607
+      Data3: -153892735
+      Data4: 1745313007
+    Path: event:/SFX/Gameplay/Light Candle
+  <BeachBall_Sfx>k__BackingField:
+    Guid:
+      Data1: -680606334
+      Data2: 1116726839
+      Data3: 1059012239
+      Data4: 2056646742
+    Path: event:/SFX/NPCs/Beach Ball/Initiate
+  <ButtonClick_Sfx>k__BackingField:
+    Guid:
+      Data1: -699829950
+      Data2: 1128432670
+      Data3: 1674792868
+      Data4: -1289976302
+    Path: event:/SFX/NPCs/Menu UI/Button Click
+  <Falling_LoopSfx>k__BackingField:
+    Guid:
+      Data1: -1477203512
+      Data2: 1136147767
+      Data3: -367710067
+      Data4: 569867649
+    Path: event:/SFX/Gameplay/Falling
 --- !u!1 &5128721700293165016
 GameObject:
   m_ObjectHideFlags: 0

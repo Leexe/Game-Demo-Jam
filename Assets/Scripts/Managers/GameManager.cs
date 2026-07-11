@@ -1,7 +1,8 @@
+using System;
 using PrimeTween;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
 	private static float _baseTimeScale = 1f; // set by console commands
 	private static float _simulationTimeScale = 1f; // gameplay
@@ -15,20 +16,41 @@ public class GameManager : MonoBehaviour
 	public float RunTime;
 	private Sequence _timeSlowSequence;
 
+	// Events
+
+	[HideInInspector]
+	public Action<bool> OnInteractableEnter;
+
+	[HideInInspector]
+	public Action OnInteractableExit;
+
+	public void TriggerOnInteractableEnter(bool isAfterDialogue = false)
+	{
+		OnInteractableEnter?.Invoke(isAfterDialogue);
+	}
+
+	public void TriggerOnInteractableExit()
+	{
+		OnInteractableExit?.Invoke();
+	}
+
+	// Unity Functions
+
 	private void Start()
 	{
 		LockCursor();
+		AudioManager.Instance.PlayMusic(FMODEvents.Instance.WindowsXP_Bgm);
 	}
 
 	// Cursor
 
-	public void LockCursor()
+	public static void LockCursor()
 	{
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
 	}
 
-	public void UnlockCursor()
+	public static void UnlockCursor()
 	{
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;

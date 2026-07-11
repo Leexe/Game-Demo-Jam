@@ -32,7 +32,7 @@ Material:
     - _Rows: 2
     - _TotalFrames: 4
     m_Floats:
-    - _ObjectRotation: -90
+    - _ObjectRotation: 180
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -50,7 +50,7 @@ Shader "Fullscreen/RetroShader"
             {
                 // Pixelization
                 float aspect = _ScreenParams.x / _ScreenParams.y;
-                float2 gridSize = float2(_ScreenParams.y * aspect, _ScreenParams.y) / _PixelSize.x;
+                float2 gridSize = floor(float2(_ScreenParams.y * aspect, _ScreenParams.y) / _PixelSize.x);
                 float2 pixelUV = (floor(i.texcoord * gridSize) + 0.5) / gridSize;
 
                 // Sample Screen

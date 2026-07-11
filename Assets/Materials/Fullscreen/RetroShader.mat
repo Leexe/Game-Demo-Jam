@@ -13,9 +13,9 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _BAYERMATRIX_8X8
-  - _COLORMODE_NONE
   m_InvalidKeywords:
   - USE_SRGB_CONVERSION
+  - _COLORMODE_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -41,7 +41,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _BayerMatrix: 2
-    - _ColorDepth: 20
+    - _ColorDepth: 10
     - _ColorMode: 0
     - _DitherDarken: 0
     - _DitherSpread: 0.3
@@ -52,6 +52,6 @@ Material:
     - _UseColorRamp: 0
     - _UseSRGBConversion: 1
     m_Colors:
-    - _PixelSize: {r: 4, g: 4, b: 0, a: 0}
+    - _PixelSize: {r: 3, g: 3, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
