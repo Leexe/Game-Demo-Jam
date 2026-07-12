@@ -7,6 +7,8 @@ Shader "Unlit/DirectionalBillboard"
         _Rows ("Rows", Integer) = 2
         _TotalFrames ("Total Active Frames", Integer) = 8
         _ObjectRotation ("Object Rotation", Float) = 0
+        _ColOffset ("Column Offset", Integer) = 0
+        _RowOffset ("Row Offset", Integer) = 0
     }
     SubShader
     {
@@ -48,6 +50,8 @@ Shader "Unlit/DirectionalBillboard"
             int _Rows;
             int _TotalFrames;
             float _ObjectRotation;
+            int _ColOffset;
+            int _RowOffset;
 
             Interpolators vert(Meshdata v)
             {
@@ -76,8 +80,8 @@ Shader "Unlit/DirectionalBillboard"
                 int frameID = floor((anglePercent * _TotalFrames) + 0.5) % _TotalFrames;
 
                 // Find Grid Coordinates
-                int frameCol = frameID % _Columns;
-                int frameRow = frameID / _Columns;
+                int frameCol = (frameID % _Columns) + _ColOffset;
+                int frameRow = (frameID / _Columns) + _RowOffset;
                 int invertedRow = (_Rows - 1) - frameRow;
 
                 // Scale and offset UVs

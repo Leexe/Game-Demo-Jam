@@ -1,5 +1,5 @@
-=== StickWizard ===
-{StickWizard > 1: -> CapKid_Repeat}
+=== Kap ===
+{Kap > 1: -> Kap_Repeat}
 
 #nm_Wizard #d_stickwizard
 Have you head of BetaRune?
@@ -15,7 +15,7 @@ Who do I trust?
 
 -> END
 
-=== CapKid_Repeat ===
+=== Kap_Repeat ===
 
 #nm_Wizard #d_stickwizard
 Who do I trust?

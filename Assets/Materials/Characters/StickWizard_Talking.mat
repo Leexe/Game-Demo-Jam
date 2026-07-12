@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: StickWizard
+  m_Name: StickWizard_Talking
   m_Shader: {fileID: 4800000, guid: 8b996691a693748dbace0e17fa3ed14b, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -24,15 +24,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: fc424884226ff234b9a0eed7a2dfafd6, type: 3}
+        m_Texture: {fileID: 2800000, guid: e8477bdbb6cdc4a499941f0fa3f2a825, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints:
     - _ColOffset: 0
-    - _Columns: 2
+    - _Columns: 3
     - _RowOffset: 0
-    - _Rows: 2
-    - _TotalFrames: 4
+    - _Rows: 1
+    - _TotalFrames: 3
     m_Floats:
     - _ObjectRotation: 180
     m_Colors: []
