@@ -34,7 +34,6 @@ public class NpcDialogueController : MonoBehaviour
 		dirToCamera.y = 0;
 		float angleTowardsCamera = Mathf.Atan2(dirToCamera.x, dirToCamera.z) * Mathf.Rad2Deg;
 		_mpb.SetFloat(ObjectRotation, angleTowardsCamera);
-		Debug.Log(angleTowardsCamera);
 		_renderer.SetPropertyBlock(_mpb);
 	}
 }
