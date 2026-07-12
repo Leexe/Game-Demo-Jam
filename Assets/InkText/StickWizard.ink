@@ -1,7 +1,7 @@
 === StickWizard ===
 {StickWizard > 1: -> StickWizard_Repeat}
 
-#nm_Wizard #d_stickwizard
+#nm_Wizard Dude #d_stickwizard
 Have you head of BetaRune?
 
 #d_stickwizard
@@ -17,7 +17,7 @@ Who do I trust?
 
 === StickWizard_Repeat ===
 
-#nm_Wizard #d_stickwizard
+#nm_Wizard Dude #d_stickwizard
 Who do I trust?
 
 -> END
