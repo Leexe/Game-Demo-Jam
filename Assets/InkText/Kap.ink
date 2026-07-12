@@ -1,23 +1,20 @@
 === Kap ===
-{Kap > 1: -> Kap_Repeat}
+{Kap > 1: -> CapKid_Repeat}
 
-#nm_Wizard #d_stickwizard
-Have you head of BetaRune?
+#nm_Kap #d_kap
+Have you seem my dad? 
 
-#d_stickwizard
-A guy name <shake>Ryan</shake> told me that it was a bad game but everyone likes it.
+#d_kap
+He told me that he would buy me <wave a=0.5 s=0.5><rainb s=0.5>ballons for my birthday</rainb></wave>.
 
-#d_stickwizard
-Hmmm...
-
-#d_stickwizard
-Who do I trust?
+#d_kap
+I hope he kept his promise...
 
 -> END
 
-=== Kap_Repeat ===
+=== CapKid_Repeat ===
 
-#nm_Wizard #d_stickwizard
-Who do I trust?
+#nm_Kap
+<wave a=1.25 s=0.5>I miss my dad...</wave> #d_kap
 
 -> END
