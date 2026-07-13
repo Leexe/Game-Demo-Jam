@@ -555,7 +555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22400762, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000011444092
+      value: -0.0000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 22426080, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -9197,7 +9197,7 @@ MonoBehaviour:
   _myCharacterController: {fileID: 1649879568}
   _idleClip: {fileID: 7400000, guid: 3195ecfc98e21c9488dcfc11a206eb5c, type: 2}
   _walkClip: {fileID: 7400000, guid: 69d6d000d83bca146891e6990de00451, type: 2}
-  _crossFadeDuration: 0.25
+  _crossFadeDuration: 0.5
 --- !u!1001 &7551910031314831092
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -26,8 +26,9 @@ public class PlayerHandController : MonoBehaviour
 	private void Update()
 	{
 		bool isMoving = _myCharacterController.CurrentHorVelocity.sqrMagnitude > 0.01f;
+		bool isGrounded = _myCharacterController.IsGrounded;
 
-		AnimationClip targetClip = isMoving ? _walkClip : _idleClip;
+		AnimationClip targetClip = (isMoving && isGrounded) ? _walkClip : _idleClip;
 
 		if (targetClip != null && _currentClip != targetClip)
 		{
