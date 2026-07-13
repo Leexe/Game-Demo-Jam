@@ -803,7 +803,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &4726866473511889167
 MonoBehaviour:
@@ -1055,8 +1055,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3903222472590938324}
   m_HandleRect: {fileID: 6149015882407524222}
   m_Direction: 2
-  m_Value: -0.000000072187284
-  m_Size: 0.5264224
+  m_Value: -0.00000007224655
+  m_Size: 0.5268109
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

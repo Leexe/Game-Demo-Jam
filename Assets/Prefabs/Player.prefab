@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3349710190313579586}
   - component: {fileID: 1782900172987157430}
   - component: {fileID: 1308866160408311653}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: PlayerUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 8364614569881626940}
   - component: {fileID: 4067464010260354606}
   - component: {fileID: 5777470712374239280}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,14 +161,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 25539458a43d75e41916296b63000f97, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -187,7 +187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4935390558285642367}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 2908274469420131158}
   - component: {fileID: 2410853951069679920}
   - component: {fileID: 7236454846658004959}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,8 @@ GameObject:
   - component: {fileID: 7367937203504357259}
   - component: {fileID: 6572203972834306740}
   - component: {fileID: 3117299971212818698}
-  m_Layer: 0
+  - component: {fileID: 8321479103769751973}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,6 +589,33 @@ MonoBehaviour:
   _characterController: {fileID: 7367937203504357259}
   _fallingSfxThreshold: 0.75
   _footstepDistance: 3.5
+--- !u!54 &8321479103769751973
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5537215545421625865}
+  serializedVersion: 5
+  m_Mass: 0.0000001
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7648593830279071660
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,7 +627,7 @@ GameObject:
   - component: {fileID: 3756304210793617333}
   - component: {fileID: 7553003815454947426}
   - component: {fileID: 7158258732100016196}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -736,8 +764,9 @@ GameObject:
   - component: {fileID: 900989607597172330}
   - component: {fileID: 8409390124034504187}
   - component: {fileID: 6620520563902938048}
-  - component: {fileID: 6535316274104961903}
-  m_Layer: 5
+  - component: {fileID: 7889747899839912781}
+  - component: {fileID: 7217226956927806868}
+  m_Layer: 8
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -759,10 +788,10 @@ RectTransform:
   - {fileID: 8364614569881626940}
   m_Father: {fileID: 4647234321863918998}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 142, y: 467.3}
+  m_SizeDelta: {x: 1919.9999, y: 1079.9999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &8409390124034504187
 Animator:
@@ -801,7 +830,7 @@ MonoBehaviour:
   _Animator: {fileID: 8409390124034504187}
   _Transitions: {fileID: 0}
   _ActionOnDisable: 0
---- !u!225 &6535316274104961903
+--- !u!225 &7889747899839912781
 CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -813,6 +842,23 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &7217226956927806868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7807974716345308643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5388319a607740a99f1ddea90636f5e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHandController
+  _animancer: {fileID: 6620520563902938048}
+  _myCharacterController: {fileID: 7367937203504357259}
+  _idleClip: {fileID: 7400000, guid: 3195ecfc98e21c9488dcfc11a206eb5c, type: 2}
+  _walkClip: {fileID: 7400000, guid: 69d6d000d83bca146891e6990de00451, type: 2}
+  _crossFadeDuration: 0.5
 --- !u!1 &8309605474270466177
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,7 +868,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2119766210963313167}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -858,7 +904,7 @@ GameObject:
   - component: {fileID: 3259994508227690399}
   - component: {fileID: 1886263908396723380}
   - component: {fileID: 2865375202045380272}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: InteractUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
