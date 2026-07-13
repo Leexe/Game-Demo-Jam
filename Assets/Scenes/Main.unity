@@ -9023,6 +9023,38 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 900989607597172330, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 900989607597172330, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 900989607597172330, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 900989607597172330, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 900989607597172330, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1919.9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 900989607597172330, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1079.9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 900989607597172330, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 142
+      objectReference: {fileID: 0}
+    - target: {fileID: 900989607597172330, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 467.3
+      objectReference: {fileID: 0}
     - target: {fileID: 1838353880424994505, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -9083,6 +9115,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5777470712374239280, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 25539458a43d75e41916296b63000f97, type: 3}
+    - target: {fileID: 5777470712374239280, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7648593830279071660, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -9109,6 +9149,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7807974716345308643, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6696221303150975399}
+    - targetCorrespondingSourceObject: {fileID: 7807974716345308643, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6696221303150975403}
   m_SourcePrefab: {fileID: 100100000, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
 --- !u!1 &6696221303150975398 stripped
 GameObject:
@@ -9127,6 +9170,34 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &6696221303150975401 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6620520563902938048, guid: fda17a197e96a456da83a8e4212e9ae9, type: 3}
+  m_PrefabInstance: {fileID: 6696221303150975396}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6696221303150975398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Kybernetik.Animancer::Animancer.AnimancerComponent
+--- !u!114 &6696221303150975403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6696221303150975398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5388319a607740a99f1ddea90636f5e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHandController
+  _animancer: {fileID: 6696221303150975401}
+  _myCharacterController: {fileID: 1649879568}
+  _idleClip: {fileID: 7400000, guid: 3195ecfc98e21c9488dcfc11a206eb5c, type: 2}
+  _walkClip: {fileID: 7400000, guid: 69d6d000d83bca146891e6990de00451, type: 2}
+  _crossFadeDuration: 0.25
 --- !u!1001 &7551910031314831092
 PrefabInstance:
   m_ObjectHideFlags: 0
