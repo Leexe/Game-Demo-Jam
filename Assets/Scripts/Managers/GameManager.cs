@@ -24,6 +24,11 @@ public class GameManager : MonoSingleton<GameManager>
 	[HideInInspector]
 	public Action OnInteractableExit;
 
+	[HideInInspector]
+	public Action<string> OnItemPickUp;
+
+	// Event Triggers
+
 	public void TriggerOnInteractableEnter(bool isAfterDialogue = false)
 	{
 		OnInteractableEnter?.Invoke(isAfterDialogue);
@@ -32,6 +37,11 @@ public class GameManager : MonoSingleton<GameManager>
 	public void TriggerOnInteractableExit()
 	{
 		OnInteractableExit?.Invoke();
+	}
+
+	public void TriggerOnItemPickUp(string itemId)
+	{
+		OnItemPickUp?.Invoke(itemId);
 	}
 
 	// Unity Functions

@@ -32,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MoonTex:
-        m_Texture: {fileID: 2800000, guid: b3f0d976f6d6802479d6465d11b3aa68, type: 3}
+        m_Texture: {fileID: 2800000, guid: b92528dc384d97141828e675127acfa1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints:
@@ -50,9 +50,9 @@ Material:
     - _GalaxyBandIntensity: 0
     - _GalaxyBandPitch: -1.57
     - _GalaxyBandWidth: 0.1
-    - _MoonGlow: 0.04
-    - _MoonGlowSize: 3.3
-    - _MoonSize: 0.048
+    - _MoonGlow: 0.03
+    - _MoonGlowSize: 2.06
+    - _MoonSize: 0.126
     - _StarColorSaturation: 1
     - _StarFlicker: 2
     - _StarGrid: 140

@@ -50,8 +50,14 @@ public class DialogueManager : MonoSingleton<DialogueManager>
 		_story = new Story(_inkFile.storyJson);
 		InitializeTagHandlers();
 
-		// prevent continuing if paused
+		// Prevent continuing if paused
 		DialogueState.AddBlockingCondition(() => Time.timeScale == 0f);
+
+		// Bind External Functions
+		_story.BindExternalFunction("IsQuestCompleted", (string questId) => IsQuestCompleted(questId));
+		_story.BindExternalFunction("IsQuestActive", (string questId) => IsQuestActive(questId));
+		_story.BindExternalFunction("StartQuest", (string questId) => StartQuest(questId));
+		_story.BindExternalFunction("CompleteQuest", (string questId) => CompleteQuest(questId));
 	}
 
 	private void OnEnable()
@@ -130,6 +136,30 @@ public class DialogueManager : MonoSingleton<DialogueManager>
 	private void StartTextAnimatorTest()
 	{
 		DialogueState.StartStory("Testing_TextAnimator");
+	}
+
+	#endregion
+
+	#region External Functions
+
+	private bool IsQuestCompleted(string questId)
+	{
+		return QuestManager.Instance.IsQuestCompleted(questId);
+	}
+
+	private bool IsQuestActive(string questId)
+	{
+		return QuestManager.Instance.IsQuestActive(questId);
+	}
+
+	private void StartQuest(string questId)
+	{
+		QuestManager.Instance.StartQuest(questId);
+	}
+
+	private void CompleteQuest(string questId)
+	{
+		QuestManager.Instance.CompleteQuest(questId);
 	}
 
 	#endregion
