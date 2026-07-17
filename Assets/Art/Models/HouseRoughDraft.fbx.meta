@@ -3,7 +3,82 @@ guid: e5ebe3b54b137f34284f96d4dca02be2
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Beach Painting Material
+    second: {fileID: 2100000, guid: 031250585765ccc4aad70e84a5b9fdb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Christmas Tree Material
+    second: {fileID: 2100000, guid: 8207a1c2258779043ba1fb45a94cc339, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Computer Material
+    second: {fileID: 2100000, guid: d87a4a0356d59b842875e84022a54ce4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Computer Peripherals
+    second: {fileID: 2100000, guid: 11aaf44c75fdbd348ae63923a43271a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Couch Material
+    second: {fileID: 2100000, guid: f42ed5ec932558844881a5f9238be0f1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Curtain Material
+    second: {fileID: 2100000, guid: 1c46aa67d5155bc4ab6b31d1b90aa8e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Curtain Material.001
+    second: {fileID: 2100000, guid: 1c46aa67d5155bc4ab6b31d1b90aa8e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dirt Material
+    second: {fileID: 2100000, guid: 356e9fba47da1784fb2bf8ceda3fdb41, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fallen Leaves Material
+    second: {fileID: 2100000, guid: a164c276480d12f4eb37e83aecf983e2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House Inside Material
+    second: {fileID: 2100000, guid: 6d8b73afffb15df4f83778f81178bb29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lamp Material
+    second: {fileID: 2100000, guid: 91072216cbaf8fd498c836b40ecdd364, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Orange Leaf Material
+    second: {fileID: 2100000, guid: da4370accc14b104595762c295a4bfd2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red Leaf Material
+    second: {fileID: 2100000, guid: 697dea39df265c44e8ab24db50274e4e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree Material
+    second: {fileID: 2100000, guid: 93e74c1bd1ff2cd47af12f56c6ef376f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Yellow Leaf Material
+    second: {fileID: 2100000, guid: 357b3ea49a5bbcb4aa84905e64129b6d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
