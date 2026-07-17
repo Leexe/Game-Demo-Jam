@@ -2473,6 +2473,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Forest
       objectReference: {fileID: 0}
+    - target: {fileID: 2489159159464621496, guid: e670599aae1d45344bd0692ca4a9eab8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 118.87624
+      objectReference: {fileID: 0}
+    - target: {fileID: 2489159159464621496, guid: e670599aae1d45344bd0692ca4a9eab8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 118.87624
+      objectReference: {fileID: 0}
+    - target: {fileID: 2489159159464621496, guid: e670599aae1d45344bd0692ca4a9eab8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 118.87624
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
